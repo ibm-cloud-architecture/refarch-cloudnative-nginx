@@ -2,6 +2,8 @@ FROM nginx
 
 ARG APIC_US_FQHN=api.us.apiconnect.ibmcloud.com
 ARG APIC_EU_FQHN=api.eu.apiconnect.ibmcloud.com
+ARG WEBAPP_EU_FQHN=bluecompute-web-app.eu-gb.mybluemix.net
+ARG WEBAPP_US_FQHN=bluecompute-web-app.us.mybluemix.net
 
 RUN rm /etc/nginx/conf.d/default.conf
 
