@@ -5,6 +5,11 @@ Follow these steps to configure NGINX as the load balancer across two BlueComput
 
 * Clone this project
 
+```
+git clone https://github.com/ibm-cloud-architecture/refarch-cloudnative-nginx
+cd refarch-cloudnative-nginx
+```
+
 * Edit file nginx.conf
 
 * Replace $BLUECOMPUTE1_URL and $BLUECOMPUTE2_URL with the URLs (example 184.172.247.213:31020)
