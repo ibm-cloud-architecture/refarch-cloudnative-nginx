@@ -1,1 +1,0 @@
-docker build -t bluecompute_nginx --build-arg APIC_US_FQHN=api.us.apiconnect.ibmcloud.com  --build-arg APIC_EU_FQHN=api.eu.apiconnect.ibmcloud.com  --build-arg WEBAPP_EU_FQHN=bluecompute-web-app.eu-gb.mybluemix.net --build-arg WEBAPP_US_FQHN=bluecompute-web-app.us.mybluemix.net    --no-cache .
