@@ -9,4 +9,4 @@ Follow these steps to configure NGINX as the load balancer across two BlueComput
 
 * Replace $BLUECOMPUTE1_URL and $BLUECOMPUTE2_URL with the URLs (example 184.172.247.213:31020)
 
-* Run `build_nginx_img.sh`
+* Run `docker run -P -v nginx.conf:/etc/nginx/nginx.conf nginx`
