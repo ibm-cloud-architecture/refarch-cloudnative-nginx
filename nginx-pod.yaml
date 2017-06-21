@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  labels: 
+    name: banana
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    env:
+    ports:
+    - containerPort: 80
+    resources:
+    volumeMounts:
+    - mountPath: /etc/nginx
+      name: config
+  volumes:
+    - name: data
+      emptyDir: {}
+    - name: config
+      configMap:
+        name: nginx-config
+        items:
+        - key: nginx.conf
+          path: nginx.conf
