@@ -1,11 +1,12 @@
 # refarch-cloudnative-nginx
 The repository host the tooling to create a Docker image using NGINX as load balancer for Bluecompute app
 
-You can use the script build_nginx_img_4APIC.sh to create a docker image from the NGINX docker base configured to route requests to two different APIC deployments.
+Follow these steps to configure NGINX as the load balancer across two BlueCompute deployment
 
-The script configures NGINX to route transactions to the servers
+* Clone this project
 
-    1) api.us.apiconnect.ibmcloud.com
-    2) api.eu.apiconnect.ibmcloud.com  
+* Edit file nginx.conf
 
-You can replace those two servers in the script if you want to target different APIC servers.
+* Replace $BLUECOMPUTE1_URL and $BLUECOMPUTE2_URL with the URLs (example 184.172.247.213:31020)
+
+* Run `docker run -P -v nginx.conf:/etc/nginx/nginx.conf nginx`
