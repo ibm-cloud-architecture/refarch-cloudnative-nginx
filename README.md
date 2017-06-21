@@ -9,7 +9,12 @@ Follow these steps to configure NGINX as the load balancer across two BlueComput
 
 * Replace $BLUECOMPUTE1_URL and $BLUECOMPUTE2_URL with the URLs (example 184.172.247.213:31020)
 
-* Run 
+* Load the nginx configuration as Kubernetes ConfigMap:
 ```
-docker run -P -v `pwd`/nginx.conf:/etc/nginx/nginx.conf nginx
+kubectl create configmap nginx-config --from-file=nginx.conf
+```
+
+* Run the nginx POD:
+```
+kubectl create -f nginx-pod.yaml
 ```
