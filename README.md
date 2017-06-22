@@ -24,6 +24,7 @@ Of course, it is very important to understand business and technical requirement
 ### Hands-on lab architecture
 For this limited hands-on lab, we will use a simplified architecture:
 * Our load-
+* Load-balancer health-check feature is basic and passive 
 * We will not implement back-end synchronisation
 ![Graph](images/ha-nginx.png)
 
@@ -41,7 +42,7 @@ The main steps of this lab are:
 * deploy nginx configuration file to your kubernetes cluster
 * deploy nginx to your kubernetes cluster
 * test load balancing
-* simulate a problem with one the application instance
+* simulate a problem with one of your application instance
 * verify that the application is still available
 
 ## 1 - Edit the nginx load balancing configuration file
@@ -86,3 +87,15 @@ kubectl expose po nginx --type=NodePort
 ## 4 - Test load balancing
 Copy the result of the previous command in your browser.
 You'll reach the nginx as a load balancer spraying the requests across the two instance
+
+## 5 - Simulate a problem with one of your application instance
+* Switch off one your application instance
+  * If you are using the BlueCompute application on Kubernetes, you can switch off one instance by reducing the number of instances of the web server to 0 
+  
+```bash
+kubectl scale --replicas=0 deploy/bluecompute-web-deployment
+```
+
+## 6 - Validate continuity
+* Go back to your web browser and retry 
+* After a few seconds, the page sould load  
