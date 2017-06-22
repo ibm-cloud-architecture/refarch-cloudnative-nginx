@@ -1,4 +1,4 @@
-# Cloud Native HA - Hands-On Lab
+# Cloud Native High-Availability - Hands-On Lab
 
 ## Introduction
 
@@ -7,14 +7,19 @@ For this lab we will add and test a [NGINX server](https://nginx.org), wich will
 
 ### Why is high-availability important for Cloud Native applications?
 When it comes to applications deployed in the cloud, perhaps the most fundamental question that's asked about non-functional requirements is "How do I ensure that my application stays running even if something fails?"
-In the cloud, you have to design for failure.
+In the cloud, you can not guarantee the availability of the different components, so you have to design for failure.
 
 ### High-availability architecture for Cloud Native
-Example of high-availability architecture for cloud-native application:
-* Global Load balancer (ex: Akamai)
-* Backend synchronisation
-  * Cloudant
-  * MySQL
+In order to secure the availability of your cloud-native application, your architecture has to take into account high-availability. Some architectural best practice:
+* Deploy your application in multiple regions
+* Use a Global Load Balancer with health-check features to direct requests only to live instances
+ * Example: [Akamai Traffic Management](https://www.akamai.com/us/en/products/web-performance/global-traffic-management.jsp)
+* Synchronise data between your instances
+  * Using a database which support master / master synchronisation (for example, [Cloudant](https://cloudant.com/) or [MySQL](https://www.digitalocean.com/community/tutorials/how-to-set-up-mysql-master-master-replication)
+  * Using messages queues
+* Inside an instance, check the health of your components and restart it automatically if needed
+  * In a cloud native environement, your containers should be stateless and can be killed if needed 
+  * This feature can be provided by [Kubernetes Probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/)
 ![Graph](images/ha-glb.png)
 
 Of course, it is very important to understand business and technical requirements for high-availability to design the right architecture. There is no "one-size fits all" solution!
