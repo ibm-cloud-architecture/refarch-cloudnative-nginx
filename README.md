@@ -80,7 +80,7 @@ kubectl expose po nginx --type=NodePort
 * Obtain the nginx public url
   * This command combines kubectl get services and kubectl get nodes to obtain the ip address and port of nginx
 ```bash
-( kubectl get nodes | awk '{print $1}'; echo ":"; kubectl get services | grep nginx | sed 's/.*:\([0-9][0-9]*\)\/.*/\1/g') | grep -v NAME | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n//g'
+( kubectl get nodes | grep -v NAME | awk '{print $1}'; echo ":"; kubectl get services | grep nginx | sed 's/.*:\([0-9][0-9]*\)\/.*/\1/g') | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n//g'
 ```
 
 You'll reach the nginx as a load balancer spraying the requests across the two instance
