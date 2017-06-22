@@ -6,8 +6,8 @@ This project is a **hands-on lab** to demo how to **add basic HA to cloud native
 For this lab we will add and test a [NGINX server](https://nginx.org), wich will be used as a proxy and load-balance the requests between two instances of a web applications.
 
 ### Why is high-availability important for Cloud Native applications?
-Pet vs Cattle
-Manage fail
+When it comes to applications deployed in the cloud, perhaps the most fundamental question that's asked about non-functional requirements is "How do I ensure that my application stays running even if something fails?"
+In the cloud, you have to design for failure.
 
 ### High-availability architecture for Cloud Native
 Example of high-availability architecture for cloud-native application:
