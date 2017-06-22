@@ -28,9 +28,8 @@ Of course, it is very important to understand business and technical requirement
 
 ### Hands-on lab architecture
 For this limited hands-on lab, we will use a simplified architecture:
-* Our load-
-* Load-balancer health-check feature is basic and passive 
-* We will not implement back-end synchronisation
+* A basic load-balancer (not resilient with limited health-check features)
+* No back-end synchronisation
 ![Graph](images/ha-nginx.png)
 
 ### Prerequisites
