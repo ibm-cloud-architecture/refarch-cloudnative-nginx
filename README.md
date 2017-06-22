@@ -5,12 +5,19 @@
 This project is a **hands-on lab** to demo how to **add basic HA to cloud native application**.
 For this lab we will add and test a [NGINX server](https://nginx.org), wich will be used as a proxy and load-balance the requests between two instances of a web applications.
 
-### Why is high-availability important for Cloud Native
+### Why is high-availability important for Cloud Native applications?
 Pet vs Cattle
 Manage fail
 
 ### High-availability architecture for Cloud Native
+Example of high-availability architecture for cloud-native application:
+* Global Load balancer (ex: Akamai)
+* Backend synchronisation
+  * Cloudant
+  * MySQL
 ![Graph](images/ha-glb.png)
+
+Of course, it is very important to understand business and technical requirements for high-availability to design the right architecture. There is no "one-size fits all" solution!
 
 ## Hands-on lab scope and goal
 
@@ -23,7 +30,7 @@ For this limited hands-on lab, we will use a simplified architecture:
 ### Prerequisites
 * A web application running on two different instances
   * You may for example deploy two instances of the [BlueCompute](https://github.com/ibm-cloud-architecture/refarch-cloudnative-kubernetes) reference application
-* A Kubernetes cluster
+* A [Kubernetes](https://kubernetes.io/) cluster
   * This hands-on lab has been tested with [Bluemix free Kubernetes cluster](https://console.bluemix.net/containers-kubernetes/launch)
 * [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) command-line interface must be installed and configured
   * For Bluemix Kubernetes Cluster, check this [documentation page](https://console.bluemix.net/docs/containers/cs_cli_install.html) if needed
