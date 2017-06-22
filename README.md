@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This project is a **hands-on lab** to demo how to **add basic HA to cloud native application**.
+This project is a **hands-on lab** to demo how to **add basic HA to a cloud native application**.
 For this lab we will add and test a [NGINX server](https://nginx.org), wich will be used as a proxy and load-balance the requests between two instances of a web applications.
 
 ### Why is high-availability important for Cloud Native applications?
@@ -13,12 +13,12 @@ In the cloud, you can not guarantee the availability of the different components
 In order to secure the availability of your cloud-native application, your architecture has to take into account high-availability. Some architectural best practice:
 * Deploy your application in multiple regions
 * Use a Global Load Balancer with health-check features to direct requests only to live instances
- * Example: [Akamai Traffic Management](https://www.akamai.com/us/en/products/web-performance/global-traffic-management.jsp)
+  * For example: [Akamai Traffic Management](https://www.akamai.com/us/en/products/web-performance/global-traffic-management.jsp)
 * Synchronise data between your instances
   * Using a database which support master / master synchronisation (for example, [Cloudant](https://cloudant.com/) or [MySQL](https://www.digitalocean.com/community/tutorials/how-to-set-up-mysql-master-master-replication)
   * Using messages queues
 * Inside an instance, check the health of your components and restart it automatically if needed
-  * In a cloud native environement, your containers should be stateless and can be killed if needed 
+  * In a cloud native environment, your containers have to be stateless and can be killed and recreated if needed 
   * This feature can be provided by [Kubernetes Probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/)
 ![Graph](images/ha-glb.png)
 
@@ -59,13 +59,13 @@ git clone https://github.com/ibm-cloud-architecture/refarch-cloudnative-nginx
 cd refarch-cloudnative-nginx
 ```
 
-* Edit file "nginx.conf"
+* Edit file "nginx.conf" with your text editor of choice
   * Replace $APP_INSTANCE1_URL and $APP_INSTANCE2_URL with your web application URLs (example: 184.172.247.213:31020)
   * For more information on this configuraton file, check the [nginx load balancing documentation](http://nginx.org/en/docs/http/load_balancing.html)
   
 ## 2 - Deploy nginx configuration file to your kubernetes cluster
 * Load the nginx configuration as [Kubernetes ConfigMap](https://kubernetes.io/docs/tasks/configure-pod-container/configmap/):
-  * Because containers must be immutable it is a good practice to not include the configuration directly in the container. ConfigMaps allow you to decouple configuration artifacts from image content to keep containerized applications portable.
+  * Because containers must be immutable, it is a good practice to not include the configuration directly in the container. ConfigMaps allow you to decouple configuration artifacts from image content to keep containerized applications portable.
 
 ```bash
 kubectl create configmap nginx-config --from-file=nginx.conf
@@ -90,12 +90,12 @@ kubectl expose po nginx --type=NodePort
 ```
 
 ## 4 - Test load balancing
-Copy the result of the previous command in your browser.
-You'll reach the nginx as a load balancer spraying the requests across the two instance
+Copy the result of the previous command in your browser address bar.
+You'll reach the nginx as a load balancer spraying the requests across the two instance.
 
 ## 5 - Simulate a problem with one of your application instance
 * Switch off one your application instance
-  * If you are using the BlueCompute application on Kubernetes, you can switch off one instance by reducing the number of instances of the web server to 0 
+  * If you are using the BlueCompute application on Kubernetes, you can switch off one instance by reducing the number of instances of the web server to 0
   
 ```bash
 kubectl scale --replicas=0 deploy/bluecompute-web-deployment
