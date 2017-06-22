@@ -29,6 +29,7 @@ For this limited hands-on lab, we will use a simplified architecture:
 ![Graph](images/ha-nginx.png)
 
 ### Prerequisites
+* [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), a version control system tool
 * A web application running on two different instances
   * You may for example deploy two instances of the [BlueCompute](https://github.com/ibm-cloud-architecture/refarch-cloudnative-kubernetes) reference application
 * A [Kubernetes](https://kubernetes.io/) cluster
