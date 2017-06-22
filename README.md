@@ -5,8 +5,14 @@
 This project is a **hands-on lab** to demo how to **add basic HA to cloud native application**.
 For this lab we will add and test a [NGINX server](https://nginx.org), wich will be used as a proxy and load-balance the requests between two instances of a web applications.
 
+### Why is high-availability important for Cloud Native
+Pet vs Cattle
+Manage fail
+
 ### High-availability architecture for Cloud Native
 ![Graph](images/ha-glb.png)
+
+## Hands-on lab scope and goal
 
 ### Hands-on lab architecture
 For this limited hands-on lab, we will use a simplified architecture:
@@ -19,6 +25,8 @@ For this limited hands-on lab, we will use a simplified architecture:
   * You may for example deploy two instances of the [BlueCompute](https://github.com/ibm-cloud-architecture/refarch-cloudnative-kubernetes) reference application
 * A Kubernetes cluster
   * This hands-on lab has been tested with [Bluemix free Kubernetes cluster](https://console.bluemix.net/containers-kubernetes/launch)
+* [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) command-line interface must be installed and configured
+  * For Bluemix Kubernetes Cluster, check this [documentation page](https://console.bluemix.net/docs/containers/cs_cli_install.html) if needed
 
 ### Steps
 The main steps of this lab are:
@@ -30,20 +38,15 @@ The main steps of this lab are:
 * verify that the application is still available
 
 ## Configure
-
-The repository host the tooling to create a Docker image using NGINX as load balancer for Bluecompute app
-
-Follow these steps to configure NGINX as the load balancer across two BlueCompute deployment
-
-* Clone this project
+* Open a terminal
+* Clone this git project
 
 ```
 git clone https://github.com/ibm-cloud-architecture/refarch-cloudnative-nginx
 cd refarch-cloudnative-nginx
 ```
 
-* Edit file nginx.conf
-
+* Edit file "nginx.conf"
   * Replace $BLUECOMPUTE1_URL and $BLUECOMPUTE2_URL with your BlueCompute web page URLs (example 184.172.247.213:31020)
 
 * Load the nginx configuration as [Kubernetes ConfigMap](https://kubernetes.io/docs/tasks/configure-pod-container/configmap/):
