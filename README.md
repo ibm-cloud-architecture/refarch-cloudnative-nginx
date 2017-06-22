@@ -46,12 +46,12 @@ For this limited hands-on lab, we will use a simplified architecture:
 
 ### Summary of the hands-on labs steps
 The main steps of this lab are:
-* edit the nginx load balancing configuration file
-* deploy nginx configuration file to your kubernetes cluster
-* deploy nginx to your kubernetes cluster
-* test load balancing
-* simulate a problem with one of your application instances
-* verify that the application is still available
+1. edit the nginx load balancing configuration file
+2. deploy nginx configuration file to your kubernetes cluster
+3. deploy nginx to your kubernetes cluster
+4. test load balancing
+5. simulate a problem with one of your application instances
+6. verify that the application is still available
 
 ## 1 - Edit the nginx load balancing configuration file
 * Open a terminal
