@@ -93,8 +93,13 @@ kubectl expose po nginx --type=NodePort
 ```
 
 ## 4 - Test load balancing
-Copy the result of the previous command in your browser address bar.
-You'll reach the nginx as a load balancer distribute the requests across the two instance.
+* Copy the result of the previous command in your browser address bar.
+* You should reach one of your 2 application instances
+* If you reload your application multiple times, you should see both the first and second instances of your application as the nginx load balancer distributes the requests.
+  * If you are using the BlueCompute Application, you will see on the homepage the cluster and region where the application is deployed. So you will be able to verify which instance provided the response
+  
+![Instance1](images/instance1.png)
+![Instance2](images/instance2.png)
 
 ## 5 - Simulate a problem with one of your application instance
 * Switch off one your application instance
