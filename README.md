@@ -103,4 +103,4 @@ kubectl scale --replicas=0 deploy/bluecompute-web-deployment
 
 ## 6 - Validate continuity
 * Go back to your web browser and retry 
-* After a few seconds, the page sould load  
+* After a few seconds, the page should load  
