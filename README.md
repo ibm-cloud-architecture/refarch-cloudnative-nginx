@@ -49,9 +49,11 @@ The main steps of this lab are:
 1. edit the nginx load balancing configuration file
 2. deploy nginx configuration file to your kubernetes cluster
 3. deploy nginx to your kubernetes cluster
-4. test load balancing
+4. check load balancer
 5. simulate a problem with one of your application instances
 6. verify that the application is still available
+7. restart the stopped instance
+8. check load balancer
 
 ## 1 - Edit the nginx load balancing configuration file
 * Open a terminal
@@ -92,10 +94,10 @@ kubectl expose po nginx --type=NodePort
 ( kubectl get nodes | grep -v NAME | awk '{print $1}'; echo ":"; kubectl get services | grep nginx | sed 's/.*:\([0-9][0-9]*\)\/.*/\1/g') | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n//g'
 ```
 
-## 4 - Test load balancing
+## 4 - Check load balancing
 * Copy the result of the previous command in your browser address bar.
 * You should reach one of your 2 application instances
-* If you reload your application multiple times, you should see both the first and second instances of your application as the nginx load balancer distributes the requests.
+* If you reload your application multiple times, you should see both the first and second instances of your application as the nginx load balancer distributes the requests
   * If you are using the BlueCompute Application, you will see on the homepage the cluster and region where the application is deployed. So you will be able to verify which instance provided the response
   
 ![Instance2](images/instance2.png)
@@ -113,3 +115,15 @@ kubectl scale --replicas=0 deploy/bluecompute-web-deployment
 * Go back to your web browser and reload the web page
 * The web page should continue to be displayed
 * If you reload your web pages multiple times, you should notice that the load balancer does not distribute the requests between the two instances anymore : the live instance is always requested  
+
+## 7 - Restart the stopped instance
+* Restart your stopped application instance
+  * If you are using the BlueCompute application on Kubernetes, you can switch on the stopped instance by increasing the number of instances of the web server to 1
+  
+```bash
+kubectl scale --replicas=1 deploy/bluecompute-web-deployment
+```
+
+## 8 - Check load balancing
+* Go back to your web browser and reload the web page multiple times
+* After 30 seconds, you should see that the nginx load balancer distributes again the requests between the two instances
