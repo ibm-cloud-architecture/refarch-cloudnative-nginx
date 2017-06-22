@@ -12,9 +12,10 @@ cd refarch-cloudnative-nginx
 
 * Edit file nginx.conf
 
-* Replace $BLUECOMPUTE1_URL and $BLUECOMPUTE2_URL with the URLs (example 184.172.247.213:31020)
+  * Replace $BLUECOMPUTE1_URL and $BLUECOMPUTE2_URL with your BlueCompute web page URLs (example 184.172.247.213:31020)
 
 * Load the nginx configuration as Kubernetes ConfigMap:
+
 ```
 kubectl create configmap nginx-config --from-file=nginx.conf
 ```
