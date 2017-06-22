@@ -54,7 +54,7 @@ cd refarch-cloudnative-nginx
 ```
 
 * Edit file "nginx.conf"
-  * Replace $APP_INSTANCE1_URL and $APP_INSTANCE2_URL with your web application URLs (example 184.172.247.213:31020)
+  * Replace $APP_INSTANCE1_URL and $APP_INSTANCE2_URL with your web application URLs (example: 184.172.247.213:31020)
   * For more information on this configuraton file, check the [nginx load balancing documentation](http://nginx.org/en/docs/http/load_balancing.html)
   
 ## 2 - Deploy nginx configuration file to your kubernetes cluster
@@ -67,20 +67,22 @@ kubectl create configmap nginx-config --from-file=nginx.conf
 
 ## 3 - Deploy nginx to your kubernetes cluster
 
-* Run the nginx POD:
+* [Create](https://kubernetes.io/docs/user-guide/kubectl/v1.5/#create) the nginx server using the "nginx-pod.yaml" configuration file
 ```bash
 kubectl create -f nginx-pod.yaml
 ```
 
-* Expose the POD port:
+* [Expose](https://kubernetes.io/docs/user-guide/kubectl/v1.5/#expose) the nginx server as a service
 ```bash
 kubectl expose po nginx --type=NodePort
 ```
 
 * Obtain the nginx public url
-  * This command combines kubectl get services and kubectl get nodes to obtain the ip address and port of nginx
+  * This command combines "kubectl get services" and "kubectl get nodes" to obtain the ip address and port of the nginx server
 ```bash
 ( kubectl get nodes | grep -v NAME | awk '{print $1}'; echo ":"; kubectl get services | grep nginx | sed 's/.*:\([0-9][0-9]*\)\/.*/\1/g') | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n//g'
 ```
 
+## 4 - Test load balancing
+Copy the result of the previous command in your browser.
 You'll reach the nginx as a load balancer spraying the requests across the two instance
