@@ -98,8 +98,8 @@ kubectl expose po nginx --type=NodePort
 * If you reload your application multiple times, you should see both the first and second instances of your application as the nginx load balancer distributes the requests.
   * If you are using the BlueCompute Application, you will see on the homepage the cluster and region where the application is deployed. So you will be able to verify which instance provided the response
   
-![Instance1](images/instance1.png)
 ![Instance2](images/instance2.png)
+![Instance1](images/instance1.png)
 
 ## 5 - Simulate a problem with one of your application instance
 * Switch off one your application instance
@@ -110,5 +110,6 @@ kubectl scale --replicas=0 deploy/bluecompute-web-deployment
 ```
 
 ## 6 - Validate continuity
-* Go back to your web browser and retry 
-* After a few seconds, the page should load  
+* Go back to your web browser and reload the web page
+* The web page should continue to be displayed
+* If you reload your web pages multiple times, you should notice that the load balancer does not distribute the requests between the two instances anymore : the live instance is always requested  
