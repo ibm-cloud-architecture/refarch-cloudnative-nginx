@@ -28,7 +28,10 @@ Of course, it is very important to understand the business and technical require
 
 ### Hands-on lab architecture
 For this limited hands-on lab, we will use a simplified architecture:
-* A basic load-balancer (not resilient with limited health-check features)
+* A basic load-balancer
+  * not resilient
+  * limited health-check features
+  * no [session persistence](http://nginx.org/en/docs/http/load_balancing.html#nginx_load_balancing_with_ip_hash) to view the distribution of the requests between the instances 
 * No back-end synchronization
 ![Graph](images/ha-nginx.png)
 
@@ -91,7 +94,7 @@ kubectl expose po nginx --type=NodePort
 
 ## 4 - Test load balancing
 Copy the result of the previous command in your browser address bar.
-You'll reach the nginx as a load balancer spraying the requests across the two instance.
+You'll reach the nginx as a load balancer distribute the requests across the two instance.
 
 ## 5 - Simulate a problem with one of your application instance
 * Switch off one your application instance
