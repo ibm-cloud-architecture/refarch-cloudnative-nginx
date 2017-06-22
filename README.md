@@ -3,33 +3,33 @@
 ## Introduction
 
 This project is a **hands-on lab** to demo how to **add basic HA to a cloud native application**.
-For this lab we will add and test a [NGINX server](https://nginx.org), wich will be used as a proxy and load-balance the requests between two instances of a web applications.
+For this lab we will add and test a [NGINX server](https://nginx.org), which will be used as a proxy and load-balance the requests between two instances of a web applications.
 
 ### Why is high-availability important for Cloud Native applications?
-When it comes to applications deployed in the cloud, perhaps the most fundamental question that's asked about non-functional requirements is "How do I ensure that my application stays running even if something fails?"
+When it comes to applications deployed in the cloud, perhaps the most fundamental question asked about non-functional requirements is "How do I ensure that my application is still running even if something fails?"
 In the cloud, you can not guarantee the availability of the different components, so you have to design for failure.
 
 ### High-availability architecture for Cloud Native
-In order to secure the availability of your cloud-native application, your architecture has to take into account high-availability. Some architectural best practice:
+In order to secure the availability of your cloud-native application, your architecture has to take into account high-availability. Here are some architectural best practice:
 * Deploy your application in multiple regions
 * Use a Global Load Balancer with health-check features to direct requests only to live instances
   * For example: [Akamai Traffic Management](https://www.akamai.com/us/en/products/web-performance/global-traffic-management.jsp)
-* Synchronise data between your instances
-  * Using a database which support master / master synchronisation (for example, [Cloudant](https://cloudant.com/) or [MySQL](https://www.digitalocean.com/community/tutorials/how-to-set-up-mysql-master-master-replication)
+* Synchronize data between your instances
+  * Using a database which support master / master synchronization (for example, [Cloudant](https://cloudant.com/) or [MySQL](https://www.digitalocean.com/community/tutorials/how-to-set-up-mysql-master-master-replication)
   * Using messages queues
 * Inside an instance, check the health of your components and restart it automatically if needed
   * In a cloud native environment, your containers have to be stateless and can be killed and recreated if needed 
   * This feature can be provided by [Kubernetes Probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/)
 ![Graph](images/ha-glb.png)
 
-Of course, it is very important to understand business and technical requirements for high-availability to design the right architecture. There is no "one-size fits all" solution!
+Of course, it is very important to understand the business and technical requirements for high-availability to design the right architecture. There is no "one-size fits all" solution!
 
 ## Hands-on lab description
 
 ### Hands-on lab architecture
 For this limited hands-on lab, we will use a simplified architecture:
 * A basic load-balancer (not resilient with limited health-check features)
-* No back-end synchronisation
+* No back-end synchronization
 ![Graph](images/ha-nginx.png)
 
 ### Prerequisites
@@ -47,7 +47,7 @@ The main steps of this lab are:
 * deploy nginx configuration file to your kubernetes cluster
 * deploy nginx to your kubernetes cluster
 * test load balancing
-* simulate a problem with one of your application instance
+* simulate a problem with one of your application instances
 * verify that the application is still available
 
 ## 1 - Edit the nginx load balancing configuration file
