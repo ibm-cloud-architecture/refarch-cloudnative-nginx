@@ -31,7 +31,7 @@ For this limited hands-on lab, we will use a simplified architecture:
 * A basic load-balancer
   * not resilient
   * limited health-check features
-  * no [session persistence](http://nginx.org/en/docs/http/load_balancing.html#nginx_load_balancing_with_ip_hash) to view the distribution of the requests between the instances 
+  * no [session persistence](http://nginx.org/en/docs/http/load_balancing.html#nginx_load_balancing_with_ip_hash) to make load balancing easier to test 
 * No back-end synchronization
 ![Graph](images/ha-nginx.png)
 
