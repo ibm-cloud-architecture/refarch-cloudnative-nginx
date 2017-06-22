@@ -15,7 +15,7 @@ In order to secure the availability of your cloud-native application, your archi
 * Use a Global Load Balancer with health-check features to direct requests only to live instances
   * For example: [Akamai Traffic Management](https://www.akamai.com/us/en/products/web-performance/global-traffic-management.jsp)
 * Synchronize data between your instances
-  * Using a database which support master / master synchronization (for example, [Cloudant](https://cloudant.com/) or [MySQL](https://www.digitalocean.com/community/tutorials/how-to-set-up-mysql-master-master-replication)
+  * Using a database which support master / master synchronization (for example, [Cloudant](https://cloudant.com/) or [MySQL](https://www.digitalocean.com/community/tutorials/how-to-set-up-mysql-master-master-replication))
   * Using messages queues
 * Inside an instance, check the health of your components and restart it automatically if needed
   * In a cloud native environment, your containers have to be stateless and can be killed and recreated if needed 
@@ -57,7 +57,7 @@ The main steps of this lab are:
 
 ## 1 - Edit the nginx load balancing configuration file
 * Open a terminal
-* Clone this git project
+* Clone this git project with this command
 
 ```
 git clone https://github.com/ibm-cloud-architecture/refarch-cloudnative-nginx
@@ -94,8 +94,13 @@ kubectl expose po nginx --type=NodePort
 ( kubectl get nodes | grep -v NAME | awk '{print $1}'; echo ":"; kubectl get services | grep nginx | sed 's/.*:\([0-9][0-9]*\)\/.*/\1/g') | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n//g'
 ```
 
+You should obtain an url, like this one :
+```
+184.172.112.213:32659
+```
+
 ## 4 - Check load balancing
-* Copy the result of the previous command in your browser address bar.
+* Copy the url from the previous command in your browser address bar
 * You should reach one of your 2 application instances
 * If you reload your application multiple times, you should see both the first and second instances of your application as the nginx load balancer distributes the requests
   * If you are using the BlueCompute Application, you will see on the homepage the cluster and region where the application is deployed. So you will be able to verify which instance provided the response
