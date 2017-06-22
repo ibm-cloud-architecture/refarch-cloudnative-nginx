@@ -1,4 +1,27 @@
-# refarch-cloudnative-nginx
+# Cloud Native HA - Hands-On Lab
+
+## Introduction
+
+This project is a **hands-on lab** to demo how to **add basic HA to cloud native application**.
+For this lab we will add and test a [NGINX server](https://nginx.org), wich will be used as a proxy and load-balance the requests between two instances of your applications.
+
+### Prerequisites
+* An application running on two different instances
+  * You may for example deploy two instances of the [BlueCompute](https://github.com/ibm-cloud-architecture/refarch-cloudnative-kubernetes) reference application
+* A Kubernetes cluster
+  * This hands on lab has been tested on [Bluemix free Kubernetes cluster](https://console.bluemix.net/containers-kubernetes/launch)
+
+### Steps
+The main steps of this lab are:
+* configure the load balancing
+* deploy nginx configuration to the kubernetes cluster
+* deploy nginx to the kubernetes cluster
+* test
+* simulate a problem with one the application instance
+* verify that the application is still available
+
+## Configure
+
 The repository host the tooling to create a Docker image using NGINX as load balancer for Bluecompute app
 
 Follow these steps to configure NGINX as the load balancer across two BlueCompute deployment
