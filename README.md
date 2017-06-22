@@ -19,7 +19,7 @@ Example of high-availability architecture for cloud-native application:
 
 Of course, it is very important to understand business and technical requirements for high-availability to design the right architecture. There is no "one-size fits all" solution!
 
-## Hands-on lab scope and goal
+## Hands-on lab description
 
 ### Hands-on lab architecture
 For this limited hands-on lab, we will use a simplified architecture:
@@ -35,16 +35,16 @@ For this limited hands-on lab, we will use a simplified architecture:
 * [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) command-line interface must be installed and configured
   * For Bluemix Kubernetes Cluster, check this [documentation page](https://console.bluemix.net/docs/containers/cs_cli_install.html) if needed
 
-### Steps
+### Summary of the hands-on labs steps
 The main steps of this lab are:
 * edit the nginx load balancing configuration file
-* deploy nginx configuration file to the kubernetes cluster
-* deploy nginx to the kubernetes cluster
+* deploy nginx configuration file to your kubernetes cluster
+* deploy nginx to your kubernetes cluster
 * test load balancing
 * simulate a problem with one the application instance
 * verify that the application is still available
 
-## Configure
+## 1 - Edit the nginx load balancing configuration file
 * Open a terminal
 * Clone this git project
 
@@ -54,13 +54,18 @@ cd refarch-cloudnative-nginx
 ```
 
 * Edit file "nginx.conf"
-  * Replace $BLUECOMPUTE1_URL and $BLUECOMPUTE2_URL with your BlueCompute web page URLs (example 184.172.247.213:31020)
-
+  * Replace $APP_INSTANCE1_URL and $APP_INSTANCE2_URL with your web application URLs (example 184.172.247.213:31020)
+  * For more information on this configuraton file, check the [nginx load balancing documentation](http://nginx.org/en/docs/http/load_balancing.html)
+  
+## 2 - Deploy nginx configuration file to your kubernetes cluster
 * Load the nginx configuration as [Kubernetes ConfigMap](https://kubernetes.io/docs/tasks/configure-pod-container/configmap/):
+  * Because containers must be immutable it is a good practice to not include the configuration directly in the container. ConfigMaps allow you to decouple configuration artifacts from image content to keep containerized applications portable.
 
 ```bash
 kubectl create configmap nginx-config --from-file=nginx.conf
 ```
+
+## 3 - Deploy nginx to your kubernetes cluster
 
 * Run the nginx POD:
 ```bash
@@ -72,27 +77,10 @@ kubectl create -f nginx-pod.yaml
 kubectl expose po nginx --type=NodePort
 ```
 
-* Obtain the service port:
+* Obtain the nginx public url
+  * This command combines kubectl get services and kubectl get nodes to obtain the ip address and port of nginx
 ```bash
-kubectl get services | grep nginx
-```
-You will see something like:
-```
-eduardos-mbp:refarch-cloudnative-nginx edu$ kubectl get services | grep nginx
-nginx                   10.10.10.117   <nodes>       80:32397/TCP        1m
+( kubectl get nodes | awk '{print $1}'; echo ":"; kubectl get services | grep nginx | sed 's/.*:\([0-9][0-9]*\)\/.*/\1/g') | grep -v NAME | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n//g'
 ```
 
-* Record the port number (32397) in this case.
-
-* Obtain the node IP:
-```bash
-kubectl get nodes
-```
-You will see the following result:
-```
-eduardos-mbp:refarch-cloudnative-nginx edu$ kubectl get nodes
-NAME              STATUS    AGE
-184.172.247.213   Ready     15d
-```
-
-* Combine the IP address obtained in the command above with the port obtained in the previous step to open the nginx UI. You'll reach the nginx as a load balancer spraying the requests across the two instance
+You'll reach the nginx as a load balancer spraying the requests across the two instance
