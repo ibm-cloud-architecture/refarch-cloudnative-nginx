@@ -10,12 +10,12 @@ When it comes to applications deployed in the cloud, perhaps the most fundamenta
 In the cloud, you can not guarantee the availability of the different components, so you have to design for failure.
 
 ### High-availability architecture for Cloud Native
-In order to secure the availability of your cloud-native application, your architecture has to take into account high-availability. Here are some architectural best practice:
+In order to secure the availability of your cloud-native application, your architecture has to take into account high-availability. Here are some architectural best practices:
 * Deploy your application in multiple regions
 * Use a Global Load Balancer with health-check features to direct requests only to live instances
   * For example: [Akamai Traffic Management](https://www.akamai.com/us/en/products/web-performance/global-traffic-management.jsp)
 * Synchronize data between your instances
-  * Using a database which support master / master synchronization (for example, [Cloudant](https://cloudant.com/) or [MySQL](https://www.digitalocean.com/community/tutorials/how-to-set-up-mysql-master-master-replication))
+  * Using a database which supports master / master synchronization (for example, [Cloudant](https://cloudant.com/) or [MySQL](https://www.digitalocean.com/community/tutorials/how-to-set-up-mysql-master-master-replication))
   * Using messages queues
 * Inside an instance, check the health of your components and restart it automatically if needed
   * In a cloud native environment, your containers have to be stateless and can be killed and recreated if needed 
@@ -108,7 +108,7 @@ You should obtain an url, like this one :
 ![Instance2](images/instance2.png)
 ![Instance1](images/instance1.png)
 
-## 5 - Simulate a problem with one of your application instance
+## 5 - Simulate a problem with one of your application instances
 * Switch off one your application instance
   * If you are using the BlueCompute application on Kubernetes, you can switch off one instance by reducing the number of instances of the web server to 0
   
